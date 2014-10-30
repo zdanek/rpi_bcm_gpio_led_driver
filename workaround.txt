@@ -1,0 +1,12 @@
+OK, I found a workaround:
+
+$ cd /usr/lib/gcc/x86_64-linux-gnu/4.4
+$ sudo cp crtbeginT.o crtbeginT.orig.o
+$ sudo cp crtbeginS.o crtbeginT.o
+
+Also, add -fPIC to the gcc command above:
+
+gcc -o libnativelib.so -shared -Wl,-soname,libnative.so -I/usr/lib/jvm/java-6-openjdk/include -I/usr/lib/jvm/java-6-openjdk/include/linux nativelib.c -static -lc -fPIC
+
+
+And walla, you have a fresh so library!
